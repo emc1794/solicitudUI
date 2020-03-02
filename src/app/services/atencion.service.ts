@@ -18,11 +18,48 @@ export class AtencionService {
   }
 
   getAll() {
-    const uri = resolve(this.urlBase, this.apis.get);
-    console.log(uri)
+    const uri = resolve(this.urlBase, this.apis.default);
     return this.http.get(uri)
     .toPromise()
     .then(data => Promise.resolve(data))
-    .catch(error => Promise.resolve(error))
+    .catch(error => Promise.reject(error));
+  }
+
+  getById(id) {
+    const uri = resolve(this.urlBase, this.apis.default);
+    return this.http.get(`${uri}/${id}`)
+      .toPromise()
+      .then(data => Promise.resolve(data))
+      .catch(error => Promise.reject(error));
+  }
+
+  delete(id) {
+    const uri = resolve(this.urlBase, this.apis.default);
+    return this.http.delete(`${uri}/${id}`)
+      .toPromise()
+      .then(data => Promise.resolve(data))
+      .catch(error => Promise.reject(error));
+  }
+  create(atencion) {
+    const uri = resolve(this.urlBase, this.apis.default);
+    return this.http.post(uri, atencion)
+      .toPromise()
+      .then(data => Promise.resolve(data))
+      .catch(error => Promise.reject(error));
+  }
+  updateTotal(id) {
+    const uri = resolve(this.urlBase, this.apis.default);
+    return this.http.post(`${uri}/total`, {id})
+      .toPromise()
+      .then(data => Promise.resolve(data))
+      .catch(error => Promise.reject(error));
+  }
+
+  update(id, atencion) {
+    const uri = resolve(this.urlBase, this.apis.default);
+    return this.http.put(`${uri}/${id}`, atencion)
+      .toPromise()
+      .then(data => Promise.resolve(data))
+      .catch(error => Promise.reject(error));
   }
 }

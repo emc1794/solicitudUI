@@ -1,0 +1,72 @@
+<div class="example-full-width">
+  <h3>Atencion:</h3>
+  <table class="example-full-width">
+    <tr class="mat-row">
+      <th class="mat-header-cell">ID:</th>
+      <td class="mat-cell">{{atencion.id}}</td>
+    </tr>
+    <tr class="mat-row">
+      <th class="mat-header-cell">Cliente:</th>
+      <td class="mat-cell">{{atencion.cliente.nombre|uppercase}} {{atencion.cliente.app|uppercase}} {{atencion.cliente.apm|uppercase}}</td>
+    </tr>
+    <tr class="mat-row">
+      <th class="mat-header-cell">Email:</th>
+      <td class="mat-cell">{{atencion.email}}</td>
+    </tr>
+    <tr class="mat-row">
+      <th class="mat-header-cell">Telefono:</th>
+      <td class="mat-cell">{{atencion.telefono}}</td>
+    </tr>
+  </table>
+  <br>
+  <h4>Detalle :</h4>
+  <form [formGroup]="pago" (ngSubmit)="onSubmitPago()">
+    <table class="example-full-width">
+      <thead>
+      <tr class="mat-row">
+        <th class="mat-header-cell">Producto</th>
+        <th class="mat-header-cell">Cantidad</th>
+        <th class="mat-header-cell">Costo</th>
+        <th class="mat-header-cell">Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="mat-row" *ngFor="let detalle of atencion.detalles">
+        <td class="mat-cell">{{detalle.producto.nombre}}</td>
+        <td class="mat-cell">{{detalle.cantidad}}</td>
+        <td class="mat-cell">{{detalle.precio}}</td>
+        <td class="mat-cell">{{detalle.total}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr class="mat-row">
+        <th colspan="3" class="mat-header-cell"> TOTAL</th>
+        <td class="mat-cell">{{atencion.total}}</td>
+      </tr>
+      <tr class="mat-row" *ngIf="atencion.estado != 'P'">
+        <th colspan="3" class="mat-header-cell"> Efectivo:</th>
+
+        <td class="mat-cell"><mat-form-field class="example-full-width">
+          <input type="number" matInput formControlName="efectivo">
+        </mat-form-field></td>
+      </tr>
+      <tr class="mat-row">
+        <th colspan="3" class="mat-header-cell"> Cambio:</th>
+        <td class="mat-cell"><mat-form-field class="example-full-width">
+          <input type="number" matInput disabled
+                 [value]="cambio">
+        </mat-form-field></td>
+      </tr>
+      </tfoot>
+    </table>
+    <br>
+    <div>
+      <button class="submit" *ngIf="atencion.estado != 'P'" [disabled]="!pago.valid" mat-flat-button color="primary">Pagar</button>
+    </div>
+  </form>
+
+  <div class="submitButton" *ngIf="atencion.estado != 'P'">
+    <button mat-button matStepperPrevious>Anterior</button>
+  </div>
+</div>
+

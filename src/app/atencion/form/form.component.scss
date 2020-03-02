@@ -1,0 +1,43 @@
+.example-full-width {
+  width: 100%;
+}
+
+.detalleTitle span{
+  font-weight: bold;
+}
+.detalleTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.submitButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit{
+  width:100%
+}
+
+.alert{
+  min-height: 50px;
+  border: 1px solid #887a7a22;
+  border-left-width: 8px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.success {
+  border-left-color: #009134;
+  background-color: #e3ffe3;
+}
+.warning {
+  border-left-color: #ffa100;
+  background-color: #fffcf1;
+}
+.danger {
+  border-left-color: #ef0208;
+  background-color: #ffefef;
+}
+
+.font-alert{
+  color: rgba(0, 0, 0, 0.54);
+}

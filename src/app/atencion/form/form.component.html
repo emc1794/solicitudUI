@@ -1,1 +1,92 @@
-<p>form works!</p>
+<mat-horizontal-stepper [linear]="true" #stepper [selectedIndex]="step">
+  <mat-step [editable]="atencion.estado!='P'">
+    <div *ngIf="mensajes.success.status" class="alert success" >
+      <p  class="font-alert">{{mensajes.success.mensaje}}</p>
+    </div>
+    <div class="alert warning" *ngIf="mensajes.warning.status">
+      <p class="font-alert">{{mensajes.warning.mensaje}}</p>
+    </div>
+    <div class="alert danger" *ngIf="mensajes.danger.status">
+      <p  class="font-alert">{{mensajes.danger.mensaje}}</p>
+    </div>
+    <div>
+      <h3>Nueva Atencion</h3>
+      <form [formGroup]="atencionForm" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel>Nueva Atencion</ng-template>
+        <mat-form-field class="example-full-width">
+          <input type="text"
+                 placeholder="Cliente"
+                 aria-label="cliente"
+                 matInput
+                 formControlName="cliente"
+                 [matAutocomplete]="auto">
+          <mat-hint>Buscar cliente</mat-hint>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let client of clientes" [value]="client">
+              {{client.nombre}} {{client.app}} {{client.apm}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <div formArrayName="detalles">
+          <br>
+          <div class="detalleTitle">
+            <span >Detalle de atencion :</span>
+            <a mat-raised-button (click)="addDetalle()">Agregar Producto</a>
+          </div>
+          <br>
+          <div *ngFor="let detalle of detalles.controls; let i=index" class="example-full-width">
+            <div [formGroupName]="i">
+              <table cellspacing="0" class="example-full-width">
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input type="text"
+                           placeholder="Producto"
+                           aria-label="cliente"
+                           matInput
+                           formControlName="producto"
+                           [matAutocomplete]="auto">
+                    <mat-hint>Buscar producto</mat-hint>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnProducto">
+                      <mat-option *ngFor="let product of productos" [value]="product">
+                        <span>{{product.nombre}}</span> |
+                        <small>Precio: {{product.precio}} BS</small>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Cantidad :</mat-label>
+                    <input type="number" matInput formControlName="cantidad">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Total :</mat-label>
+                    <input tipe="number" matInput disabled
+                           [value]="detalles.at(i).get('cantidad').value * detalles.at(i).get('producto').value.precio">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <a mat-icon-button (click)="deleteDetalle(i)"> <fa-icon [icon]="icons.faWindowClose"></fa-icon></a>
+                </td>
+              </table>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="submitButton">
+          <button class="submit" mat-flat-button [disabled]="!atencionForm.valid" color="primary">Registrar</button>
+        </div>
+
+      </form>
+      <div class="submitButton">
+        <button *ngIf="data.action!=='registrar'" mat-button matStepperNext>Siguiente</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [editable]="data.action!='registrar'">
+    <ng-template matStepLabel>Realizar Pago</ng-template>
+    <app-view *ngIf="data.action!='registrar'" [atencion]="atencion" (pagado)="pagado()"></app-view>
+  </mat-step>
+</mat-horizontal-stepper>

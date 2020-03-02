@@ -1,0 +1,28 @@
+<div>
+    <h3>Registrar Cliente</h3>
+    <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo</mat-label>
+            <input matInput formControlName="tipo">
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Precio</mat-label>
+            <input type="number" matInput formControlName="precio">
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Precio1</mat-label>
+            <input type="number" matInput formControlName="precio1">
+          </mat-form-field>
+
+        <div class="submitButton">
+            <button class="submit" mat-flat-button [disabled]="!productoForm.valid" color="primary">Registrar</button>
+          </div>
+    </form>
+  </div>

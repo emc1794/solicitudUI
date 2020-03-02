@@ -8,11 +8,19 @@ export const environment = {
     urlBase: 'http://localhost:3000',
     resources: {
       atencion : {
-        get: '/atenciones'
+        default: '/atenciones'
+      },
+      cliente : {
+        default: '/clientes'
       },
       producto: {
-        get: {
-        }
+        default: '/productos'
+      },
+      detalleAtencion: {
+        default: '/atenciones/detalles'
+      },
+      pago: {
+        default: '/pagos'
       }
     }
   }

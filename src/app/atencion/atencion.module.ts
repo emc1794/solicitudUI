@@ -2,24 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AtencionRoutingModule } from './atencion-routing.module';
-import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { AtencionComponent } from './atencion.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDividerModule} from '@angular/material/divider';
-import { MatTableModule } from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
+import {ReactiveFormsModule} from '@angular/forms';
+import { ViewComponent } from './view/view.component';
+import { MaterialModule } from '../material.module';
 
 
 @NgModule({
-  declarations: [ListComponent, FormComponent, AtencionComponent],
+  declarations: [
+    FormComponent,
+    AtencionComponent,
+    ViewComponent
+  ],
+  entryComponents: [
+    FormComponent
+  ],
   imports: [
     CommonModule,
     AtencionRoutingModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatTableModule,
-    MatButtonModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class AtencionModule { }

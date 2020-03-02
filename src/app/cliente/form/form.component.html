@@ -1,0 +1,38 @@
+<div>
+  <h3>Registrar Cliente</h3>
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre">
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="app">
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="apm">
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>Telefono</mat-label>
+          <input type="tel" matInput formControlName="telefono">
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput placeholder="Ex. email@gmail.com" formControlName="email">
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="direccion">
+        </mat-form-field>
+
+      <div class="submitButton">
+          <button class="submit" mat-flat-button [disabled]="!clienteForm.valid" color="primary">Registrar</button>
+        </div>
+  </form>
+</div>
