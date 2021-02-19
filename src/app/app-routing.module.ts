@@ -4,13 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'atencion', loadChildren: () => import('./atencion/atencion.module').then(m => m.AtencionModule)
+    path: '', redirectTo: '/cliente', pathMatch: 'full'
   },
   {
-    path:'producto', loadChildren: () => import('./producto/producto.module').then(m => m.ProductoModule)
+    path: 'atencion', loadChildren: () => import('./atencion/atencion.module').then(m => m.AtencionModule)
   },
   {
-    path:'cliente', loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
+    path: 'producto', loadChildren: () => import('./producto/producto.module').then(m => m.ProductoModule)
+  },
+  {
+    path: 'cliente', loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
   }
 ];
 
